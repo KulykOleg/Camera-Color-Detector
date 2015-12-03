@@ -15,9 +15,16 @@
         android:layout_height="20dip"/>
 
     <TextView
-        android:id="@+id/colorText"
+        android:id="@+id/rgbText"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="20dip" />
+
+    <TextView
+        android:id="@+id/xyText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="20dip" />
 </RelativeLayout>

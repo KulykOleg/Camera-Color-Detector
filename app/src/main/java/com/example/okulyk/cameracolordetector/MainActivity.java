@@ -1,6 +1,7 @@
 package com.example.okulyk.cameracolordetector;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Ca
     SurfaceHolder mSurfaceHolder;
     View mColorStub;
     TextView mColorText;
+    TextView mHueText;
 
 
     @Override
@@ -25,7 +27,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Ca
         setContentView(R.layout.activity_main);
 
         mColorStub = findViewById(R.id.colorStub);
-        mColorText = (TextView) findViewById(R.id.colorText);
+        mColorText = (TextView) findViewById(R.id.rgbText);
+        mHueText = (TextView) findViewById(R.id.xyText);
 
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         mSurfaceHolder = mSurfaceView.getHolder();
@@ -113,6 +116,16 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Ca
         String strColor = String.format("#%06X", 0xFFFFFF & centerPixel);
         mColorStub.setBackgroundColor(centerPixel);
         mColorText.setText("Color: " + strColor);
+        int red = (centerPixel >> 16) & 0xFF;
+        int green = (centerPixel >> 8) & 0xFF;
+        int blue = (centerPixel >> 0) & 0xFF;
+
+        float[] hsv = new float[3];
+        Color.colorToHSV(centerPixel, hsv);
+
+        mHueText.setText("X: " + hsv[0]/360 + " Y:" + hsv[1]);
+
+        //to color: invert x and y
     }
 
     public int[] decodeYUV420SP(int[] rgb, byte[] yuv420sp, int width, int height) {
