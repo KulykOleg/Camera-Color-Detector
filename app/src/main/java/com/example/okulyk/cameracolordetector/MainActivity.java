@@ -3,7 +3,6 @@ package com.example.okulyk.cameracolordetector;
 import android.app.Activity;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -33,6 +32,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Ca
 
         mSurfaceHolder.addCallback(this);
     }
+
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -73,6 +73,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Ca
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         mCamera.stopPreview();
+        mCamera.setPreviewCallback(null);
         mCamera.release();
         mCamera = null;
     }
